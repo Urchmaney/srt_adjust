@@ -1,0 +1,25 @@
+{
+  "name": "srt_adjust",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Urchmaney/srt_adjust.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Urchmaney/srt_adjust/issues"
+  },
+  "homepage": "https://github.com/Urchmaney/srt_adjust#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}
