@@ -1,5 +1,6 @@
 const express = require('express')
 const multer  = require('multer')
+const adjustSRTFile = require('./src/adjuster/srt');
 
 const app = express();
 const PORT = 3000;
@@ -10,7 +11,7 @@ const upload = multer({
       cb(null, 'tmp/')
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname + '-' + Date.now() + '.srt')
+      cb(null, file.originalname.split('.srt')[0] + '-' + Date.now() + '.srt')
     }
   }),
   limits: { fileSize: 100000 },
@@ -42,7 +43,9 @@ app.post('/upload', (req, res, next) => {
     }
   })
 }, (req, res) => {
-  res.send({ status: 'ok'})
+  adjustSRTFile(req.file.filename, (file, cb) => {
+    res.download(file, cb);
+  })
 }
 )
 
