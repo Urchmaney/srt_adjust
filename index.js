@@ -43,7 +43,13 @@ app.post('/upload', (req, res, next) => {
     }
   })
 }, (req, res) => {
-  adjustSRTFile(req.file.filename, (file, cb) => {
+  const parsedInterval = parseInt(req.query.interval);
+  if (isNaN(parsedInterval)) {
+    res.status(400);
+    res.send({ error: 'Error with the interval value.', msg: 'The interval value must be a number.' })
+  }
+
+  adjustSRTFile(req.file.filename, parsedInterval, (req.query.forward.toLowerCase() != 'false'), (file, cb) => {
     res.download(file, cb);
   })
 }
