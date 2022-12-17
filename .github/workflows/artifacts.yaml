@@ -2,7 +2,7 @@ name: Test Arttifacts
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  - upload_file:
+  upload_file:
     name: Upload File
     steps:
       - shell: bash
@@ -13,7 +13,7 @@ jobs:
         with:
           name: output-log-file
           path: output.log
-  - download_file:
+  download_file:
     needs: upload_file
     name: Download File
     steps:
