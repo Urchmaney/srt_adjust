@@ -1,6 +1,7 @@
 const express = require('express')
 const multer  = require('multer')
 const adjustSRTFile = require('./src/adjuster/srt');
+const { subtractTime } = require('./src/util');
 
 const app = express();
 const PORT = 3000;
@@ -43,13 +44,26 @@ app.post('/upload', (req, res, next) => {
     }
   })
 }, (req, res) => {
+  if(!req.query.interval && !(req.query.soundTime && req.query.subtitleTime)) {
+    req.status(400)
+    req.send({ error: 'Error with the query parameters!', msg: 'You need to supply an interval or a sound and subtitle time.' })
+  }
+  
   const parsedInterval = parseInt(req.query.interval);
-  if (isNaN(parsedInterval)) {
+  if (isNaN(parsedInterval) && !req.query.soundTime) {
     res.status(400);
     res.send({ error: 'Error with the interval value.', msg: 'The interval value must be a number.' })
   }
 
-  adjustSRTFile(req.file.filename, parsedInterval, (req.query.forward.toLowerCase() != 'false'), (file, cb) => {
+  const regex = /^\d{2}:\d{2}:\d{2}$/
+  if (!req.query.interval && !(regex.test(req.query.soundTime && regex.test(req.query.subtitleTime)))) {
+    req.status(400)
+    req.send({ error: 'Error with the query sound time or subtitle time!', msg: 'The sound and subtitle time has to be in 00:00:00 format.' })
+  }
+
+  const subtracted = subtractTime(req.query.subtitleTime, req.query.soundTime);
+
+  adjustSRTFile(req.file.filename, parsedInterval || subtracted, (req.query.forward.toLowerCase() != 'false'), (file, cb) => {
     res.download(file, cb);
   })
 }
