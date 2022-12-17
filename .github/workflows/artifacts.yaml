@@ -23,5 +23,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: output-log-file
+      - name: Display downloaded Artifacts
+        run: ls -R
+      - name: Show file content
+        shell: bash
+        run: cat output-log-file
     
 
