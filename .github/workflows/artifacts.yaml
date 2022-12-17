@@ -27,6 +27,6 @@ jobs:
         run: ls -R
       - name: Show file content
         shell: bash
-        run: cat output-log-file
+        run: cat output.log
     
 
