@@ -4,6 +4,7 @@ on: [push]
 jobs:
   upload_file:
     name: Upload File
+    runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: |
@@ -15,6 +16,7 @@ jobs:
           path: output.log
   download_file:
     needs: upload_file
+    runs-on: ubuntu-latest
     name: Download File
     steps:
       - name: Download a single artifact
