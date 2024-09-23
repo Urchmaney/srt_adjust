@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRT: Subtitle Adjustment</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h1>SRT | Subtitle Ajustment</h1>
+      <div class="card">
+        <h1>Text File Reader</h1>
+        <div>
+          Select a text file:
+          <input type="file" id="fileInput">
+        </div>
+        <div>
+          <form id="adjustmentForm">
+            <span>Ajust by</span>
+            <input id="minutes" type="number" max="60" min="0" name="minutes" /> min : <input id="seconds" type="number" max="60" min="0" name="seconds" /> seconds
+            <input type="submit" value="Adjust" />
+          </form>
+          <button id="download">Download</button>
+        </div>
+        <div id="displaySection">
+          <pre id="fileDisplayArea"></pre>
+          <pre id="outputDisplay"></pre>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
