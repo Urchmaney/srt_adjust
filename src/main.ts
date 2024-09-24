@@ -5,11 +5,11 @@ const fileInput = document.getElementById('fileInput');
 const fileDisplayArea = document.getElementById('fileDisplayArea');
 const outputDisplay = document.getElementById('outputDisplay')!;
 const adjustmentForm = document.getElementById('adjustmentForm');
-const download = document.getElementById("download")!;
-const minutesInput: HTMLInputElement = document.getElementById('minutes')! as HTMLInputElement;
+const download = document.getElementById("download")! as HTMLButtonElement;
+// const minutesInput: HTMLInputElement = document.getElementById('minutes')! as HTMLInputElement;
 const secondsInput: HTMLInputElement = document.getElementById('seconds')! as HTMLInputElement;
+const displaySection = document.getElementById('displaySection')!;
 
-let gFile: File;
 
 fileInput?.addEventListener('change', function (e) {
     const target = e.target as HTMLInputElement;
@@ -17,21 +17,18 @@ fileInput?.addEventListener('change', function (e) {
     outputDisplay.innerText = "";
     if (!file) return;
 
-    const textType = /text.*/;
+    // const textType = /text.*/;
     const nameRegex = /[a-zA-Z0-9._-]+.srt/
 
-    console.log(file.type.match(textType), "=======", file.type)
     if (file.name.match(nameRegex)) {
-        gFile = file;
         var reader = new FileReader();
 
         reader.onload = function (e) {
             if (fileDisplayArea) {
                 fileDisplayArea.innerText = reader.result?.toString() || "";
+                displaySection.style.display = 'block'
             }
-
         }
-
         reader.readAsText(file);
     } else {
         if (fileDisplayArea) fileDisplayArea.innerText = "File not supported!"
@@ -43,14 +40,20 @@ download.addEventListener("click", function(e) {
         document.createElement("a")
     );
 
+    const data = outputDisplay.innerText;
+    const lines = data.split('\n');
+    let newData = "";
+    lines.forEach((line) => newData += `${line.trim()}\n`);
+    newData += '\n\n';
+
     link.setAttribute('download', "export.srt");
-    link.setAttribute('href', 'data:' + 'text/plain'  +  ';charset=utf-8,' + encodeURIComponent(outputDisplay.innerText));
+    link.setAttribute('href', 'data:' + 'text/plain'  +  ';charset=utf-16,' + newData);
     link.click(); 
 })
 
 adjustmentForm?.addEventListener('submit', (ev: SubmitEvent) => {
     ev.preventDefault();
-    const minutes = minutesInput.value;
+    // const minutes = minutesInput.value;
     const seconds = secondsInput.value;
 
     // if (!gFile) return;
@@ -68,12 +71,14 @@ adjustmentForm?.addEventListener('submit', (ev: SubmitEvent) => {
     // reader.readAsText(gFile)
 
     const lines = fileDisplayArea?.innerText.split("\n");
-    lines?.forEach((line, index) => {
-        setTimeout(() => {
-            
-            outputDisplay?.append(`${adjustTimeLine(line, Number(seconds), true) || ""} \n`);
-        }, (1 * index))
+    lines?.forEach((line) => {
+        outputDisplay?.append(`${adjustTimeLine(line, Number(seconds), false) || ""} \n`);
+        // setTimeout(() => {
+        //     // console.log(`|${adjustTimeLine(line, Number(seconds), false)}|`)
+        //     outputDisplay?.append(`${adjustTimeLine(line, Number(seconds), false) || ""} \n`);
+        // }, (1 * index))
     })
+    download.disabled = false;
 });
 
 
