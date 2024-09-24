@@ -9,26 +9,41 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" class="container">
     <div>
-      <h1>SRT | Subtitle Ajustment</h1>
-      <div class="card">
-        <h1>Text File Reader</h1>
-        <div>
-          Select a text file:
-          <input type="file" id="fileInput">
+      <h1 class="text-4xl my-7">SRT | Subtitle Ajustment</h1>
+      <div>
+        <div class="flex gap-5 py-4">
+          <span class="font-bold text-lg">Select a srt file:</span>
+          <input type="file" id="fileInput" class="cursor-pointer">
         </div>
-        <div>
-          <form id="adjustmentForm">
-            <span>Ajust by</span>
-            <input id="minutes" type="number" max="60" min="0" name="minutes" /> min : <input id="seconds" type="number" max="60" min="0" name="seconds" /> seconds
-            <input type="submit" value="Adjust" />
-          </form>
-          <button id="download">Download</button>
-        </div>
-        <div id="displaySection">
-          <pre id="fileDisplayArea"></pre>
-          <pre id="outputDisplay"></pre>
+        <div class="hidden" id="displaySection">
+          <div class="flex justify-end py-8">
+            <button id="download" class="disabled:hover:border-transparent" disabled>Download</button>
+          </div>
+          <div class="flex flex-wrap gap-5 w-full justify-between">
+            <pre id="fileDisplayArea" class="border border-black grow  max-h-64 overflow-y-scroll p-2">
+            </pre>
+            <div class="top-1/4">
+              <form id="adjustmentForm" class="text-md">
+                <div class="mb-3">
+                  <span class="font-normal">Ajust by</span>
+                  <!-- <input class="border border-gray rounded" id="minutes" type="number" max="60" min="0" name="minutes" /> min : -->
+                  <input class="border border-gray rounded p-2 cursor-pointer" id="seconds" type="number" max="60"
+                    min="0" name="seconds" />
+                  <span class="font-semibold">seconds</span>
+                </div>
+
+                <input type="submit" value="Adjust"
+                  class="w-full p-3 bg-lightgray rounded cursor-pointer border border-lightgray font-semibold text-black hover:border-[#646cff]" />
+              </form>
+
+            </div>
+            <pre id="outputDisplay" class="border border-black grow max-h-64 overflow-y-scroll p-2">
+
+            </pre>
+          </div>
+
         </div>
 
       </div>

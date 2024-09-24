@@ -1,6 +1,6 @@
 export const adjustTimeLine = (line: string, interval: number, forward: boolean) : string => {
   const regex = /^\d{2}:\d{2}:\d{2},\d{3}\s*-->\s*\d{2}:\d{2}:\d{2},\d{3}$/;
-  if (!regex.test(line)) return line;
+  if (!regex.test(line)) return line.trim();
 
   let newLine: string[] = []
   line.split('-->').forEach((val) => {
@@ -28,7 +28,7 @@ export const adjustTimeLine = (line: string, interval: number, forward: boolean)
     newLine.push(`${colonSplitted.join(":")},${commaSplitted[1]}`);
   })
 
-  return newLine.join('-->');
+  return newLine.join('-->').trim();
 }
 
 
