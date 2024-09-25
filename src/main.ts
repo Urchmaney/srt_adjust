@@ -9,7 +9,10 @@ const download = document.getElementById("download")! as HTMLButtonElement;
 // const minutesInput: HTMLInputElement = document.getElementById('minutes')! as HTMLInputElement;
 const secondsInput: HTMLInputElement = document.getElementById('seconds')! as HTMLInputElement;
 const displaySection = document.getElementById('displaySection')!;
+const forwardBtn = document.getElementById('fwdBtn')!;
+const backwardBtn = document.getElementById('bwdBtn')!;
 
+let  toAdjustForward: boolean = true
 
 fileInput?.addEventListener('change', function (e) {
     const target = e.target as HTMLInputElement;
@@ -53,33 +56,26 @@ download.addEventListener("click", function(e) {
 
 adjustmentForm?.addEventListener('submit', (ev: SubmitEvent) => {
     ev.preventDefault();
-    // const minutes = minutesInput.value;
+    outputDisplay.innerHTML = '';
     const seconds = secondsInput.value;
 
-    // if (!gFile) return;
-    // console.log(gFile)
-
-    // const reader = new FileReader();
-    // reader.onprogress = function(e) {
-    //     if (outputDisplay) {
-    //         console.log(reader.result?.toString() || "");
-    //         outputDisplay.innerText = reader.result?.toString() || "";
-    //         // outputDisplay.append(reader.result?.toString() || "")
-    //     }
-    // }
-
-    // reader.readAsText(gFile)
 
     const lines = fileDisplayArea?.innerText.split("\n");
     lines?.forEach((line) => {
-        outputDisplay?.append(`${adjustTimeLine(line, Number(seconds), false) || ""} \n`);
-        // setTimeout(() => {
-        //     // console.log(`|${adjustTimeLine(line, Number(seconds), false)}|`)
-        //     outputDisplay?.append(`${adjustTimeLine(line, Number(seconds), false) || ""} \n`);
-        // }, (1 * index))
+        outputDisplay?.append(`${adjustTimeLine(line, Number(seconds), toAdjustForward) || ""} \n`);
     })
     download.disabled = false;
 });
 
+forwardBtn.addEventListener('click',  () => {
+    toAdjustForward = true;
+    forwardBtn.classList.add('bg-[#646cff]');
+    backwardBtn.classList.remove('bg-[#646cff]');
+});
 
+backwardBtn.addEventListener('click',  () => {
+    toAdjustForward = false;
+    backwardBtn.classList.add('bg-[#646cff]');
+    forwardBtn.classList.remove('bg-[#646cff]');
+});
 
