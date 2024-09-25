@@ -30,23 +30,3 @@ export const adjustTimeLine = (line: string, interval: number, forward: boolean)
 
   return newLine.join('-->').trim();
 }
-
-
-// const adjustSRTFile = (path, interval, forward, cb) => {
-//   const rd = readline.createInterface({
-//     input: fs.createReadStream(`tmp/${path}`),
-//     console: false
-//   });
-
-//   const newPath = `tmp/new_${path}`
-//   const wd = fs.createWriteStream(newPath);
-//   rd.on('line', function (line) {
-//     const newLine = adjustTimeLine(line, interval, forward);
-//     wd.write(`${newLine}\n`)
-//   }).on('close', () => {
-//     cb(newPath, () => { fs.unlinkSync(newPath) });
-//     fs.unlinkSync(`tmp/${path}`);
-//   })
-// }
-
-// module.exports = adjustSRTFile;
