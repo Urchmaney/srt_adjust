@@ -69,13 +69,13 @@ adjustmentForm?.addEventListener('submit', (ev: SubmitEvent) => {
 
 forwardBtn.addEventListener('click',  () => {
     toAdjustForward = true;
-    forwardBtn.classList.add('bg-[#646cff]');
-    backwardBtn.classList.remove('bg-[#646cff]');
+    forwardBtn.classList.add('bg-[#a9a9a9]');
+    backwardBtn.classList.remove('bg-[#a9a9a9]');
 });
 
 backwardBtn.addEventListener('click',  () => {
     toAdjustForward = false;
-    backwardBtn.classList.add('bg-[#646cff]');
-    forwardBtn.classList.remove('bg-[#646cff]');
+    backwardBtn.classList.add('bg-[#a9a9a9]');
+    forwardBtn.classList.remove('bg-[#a9a9a9]');
 });
 

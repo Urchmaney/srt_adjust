@@ -13,9 +13,9 @@
     <div>
       <h1 class="text-4xl my-7">SRT | Subtitle Ajustment</h1>
       <div>
-        <div class="flex gap-5 py-4">
+        <div class="flex gap-5 py-4 items-center">
           <span class="font-bold text-lg">Select a srt file:</span>
-          <input type="file" id="fileInput" class="cursor-pointer">
+          <input type="file" id="fileInput" class="cursor-pointer p-3 rounded-md bg-lightgray relative file:p-1 file:px-3 file:ps-5 file:border-none file:bg-[#a9a9a9] file:rounded-md file:text-white file:cursor-pointer">
         </div>
         <div class="hidden" id="displaySection">
           <div class="flex justify-end py-8">
@@ -34,7 +34,7 @@
                   <span class="font-semibold">seconds</span>
                 </div>
                 <div class="flex py-3 gap-2">
-                  <button class="grow bg-[#646cff]" id="fwdBtn" type="button">&gt;&gt;</button> <button class="grow" id="bwdBtn" type="button">&lt;&lt;</button>
+                  <button class="grow bg-[#a9a9a9]" id="fwdBtn" type="button">&gt;&gt;</button> <button class="grow" id="bwdBtn" type="button">&lt;&lt;</button>
                 </div>
 
                 <input type="submit" value="Adjust"
